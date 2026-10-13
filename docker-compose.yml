@@ -1,0 +1,10 @@
+# Standalone, like web/docker-compose.yml and backend/docker-compose.yml —
+# its own Compose project, can't collide with any other stack on the host.
+# Port 8086 is the next free one after web's own 8085 (see
+# backend/.env.example's port survey) — reachable at http://<vps-ip>:8086,
+# no domain/nginx-reverse-proxy work needed, per the explicit ask.
+services:
+  admin-web:
+    build: .
+    ports:
+      - "${ADMIN_WEB_HOST_PORT:-8086}:80"
